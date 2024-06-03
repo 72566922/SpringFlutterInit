@@ -1,3 +1,4 @@
+// flutter_application_1/lib/login_screen.dart
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -17,23 +18,18 @@ class _LoginScreenState extends State<LoginScreen> {
   String _message = '';
 
   Future<void> _login() async {
-    // Imprimir los datos enviados por consola
-    print('Enviando datos: ${_firstNameController.text}, ${_lastNameController.text}, ${_emailController.text}');
-
     final queryParameters = {
       'firstName': _firstNameController.text,
       'lastName': _lastNameController.text,
       'email': _emailController.text,
     };
 
-    final uri = Uri.http('localhost:8080', '/person', queryParameters);
+    final uri =
+        Uri.http('localhost:8080', '/ferreteria/person', queryParameters);
 
     final response = await http.get(uri, headers: {
       'Content-Type': 'application/json; charset=UTF-8',
     });
-
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
 
     if (response.statusCode == 200) {
       setState(() {
@@ -42,9 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => AlmacenScreen(
-            firstName: _firstNameController.text,
-          ),
+          builder: (context) => AlmacenScreen(),
         ),
       );
     } else {

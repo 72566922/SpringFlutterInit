@@ -1,6 +1,10 @@
+//SPRINGBOOTFLUTTER/jorgecolors/src/main/java/com/jorgecolors/jorgecolors/Person/PersonService
 package com.jorgecolors.jorgecolors.Person;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,7 +18,7 @@ public class PersonService {
         personRepo.save(person);
     }
 
-    public Person getPerson(String firstName, String lastName, String email) {
-        return personRepo.findByFirstNameAndLastNameAndEmail(firstName, lastName, email);
+    public List<Person> obtenerTodasPerson() {
+        return personRepo.findAll();
     }
 }

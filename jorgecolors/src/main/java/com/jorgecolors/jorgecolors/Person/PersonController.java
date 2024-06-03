@@ -1,14 +1,19 @@
+//SPRINGBOOTFLUTTER/jorgecolors/src/main/java/com/jorgecolors/jorgecolors/Person/PersonController.java
 package com.jorgecolors.jorgecolors.Person;
+
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/person")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:56315")
 public class PersonController {
     private final PersonService personService;
 
@@ -23,12 +28,8 @@ public class PersonController {
     }
 
     @GetMapping
-    public ResponseEntity<Person> getPerson(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email) {
-        Person person = personService.getPerson(firstName, lastName, email);
-        if (person != null) {
-            return ResponseEntity.ok(person);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    public ResponseEntity<List<Person>> getPerson() {
+        List<Person> person = personService.obtenerTodasPerson();
+        return ResponseEntity.ok(person);
     }
 }
